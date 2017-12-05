@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.tustcs.eztable.dao.FileKeywordMapper" >
+  <resultMap id="BaseResultMap" type="org.tustcs.eztable.entity.FileKeyword" >
+    <id column="keyword_id" property="keywordId" jdbcType="INTEGER" />
+    <result column="keyword_name" property="keywordName" jdbcType="VARCHAR" />
+    <result column="keyword_column" property="keywordColumn" jdbcType="INTEGER" />
+    <result column="file_id" property="fileId" jdbcType="INTEGER" />
+    <result column="keyword_value" property="keywordValue" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    keyword_id, keyword_name, keyword_column, file_id, keyword_value
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_keyword
+    where keyword_id = #{keywordId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from file_keyword
+    where keyword_id = #{keywordId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.tustcs.eztable.entity.FileKeyword" >
+    insert into file_keyword (keyword_id, keyword_name, keyword_column, 
+      file_id, keyword_value)
+    values (#{keywordId,jdbcType=INTEGER}, #{keywordName,jdbcType=VARCHAR}, #{keywordColumn,jdbcType=INTEGER}, 
+      #{fileId,jdbcType=INTEGER}, #{keywordValue,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.tustcs.eztable.entity.FileKeyword" >
+    insert into file_keyword
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="keywordId != null" >
+        keyword_id,
+      </if>
+      <if test="keywordName != null" >
+        keyword_name,
+      </if>
+      <if test="keywordColumn != null" >
+        keyword_column,
+      </if>
+      <if test="fileId != null" >
+        file_id,
+      </if>
+      <if test="keywordValue != null" >
+        keyword_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="keywordId != null" >
+        #{keywordId,jdbcType=INTEGER},
+      </if>
+      <if test="keywordName != null" >
+        #{keywordName,jdbcType=VARCHAR},
+      </if>
+      <if test="keywordColumn != null" >
+        #{keywordColumn,jdbcType=INTEGER},
+      </if>
+      <if test="fileId != null" >
+        #{fileId,jdbcType=INTEGER},
+      </if>
+      <if test="keywordValue != null" >
+        #{keywordValue,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.tustcs.eztable.entity.FileKeyword" >
+    update file_keyword
+    <set >
+      <if test="keywordName != null" >
+        keyword_name = #{keywordName,jdbcType=VARCHAR},
+      </if>
+      <if test="keywordColumn != null" >
+        keyword_column = #{keywordColumn,jdbcType=INTEGER},
+      </if>
+      <if test="fileId != null" >
+        file_id = #{fileId,jdbcType=INTEGER},
+      </if>
+      <if test="keywordValue != null" >
+        keyword_value = #{keywordValue,jdbcType=INTEGER},
+      </if>
+    </set>
+    where keyword_id = #{keywordId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.tustcs.eztable.entity.FileKeyword" >
+    update file_keyword
+    set keyword_name = #{keywordName,jdbcType=VARCHAR},
+      keyword_column = #{keywordColumn,jdbcType=INTEGER},
+      file_id = #{fileId,jdbcType=INTEGER},
+      keyword_value = #{keywordValue,jdbcType=INTEGER}
+    where keyword_id = #{keywordId,jdbcType=INTEGER}
+  </update>
+</mapper>
